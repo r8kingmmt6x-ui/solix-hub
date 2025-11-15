@@ -1,10 +1,30 @@
+"use client"
+
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Zap, Gauge, Shield, Code, Headphones, Monitor, Check } from 'lucide-react'
+import { Zap, Gauge, Shield, Code, Headphones, Monitor, Check, Copy } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { KomerzaCheckoutButton } from "@/components/komerza-checkout-button"
+import { useToast } from "@/hooks/use-toast"
 
 export default function Home() {
+  const { toast } = useToast()
+  
+  const handleCopyScript = () => {
+    const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/meobeo8/a/a/a"))()'
+    navigator.clipboard.writeText(script)
+    toast({
+      description: (
+        <div className="flex items-center gap-2">
+          <Check className="h-4 w-4" />
+          <span>Script copied to clipboard!</span>
+        </div>
+      ),
+      duration: 1500,
+    })
+  }
+
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -22,7 +42,13 @@ export default function Home() {
           {/* Logo & Title */}
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 flex items-center justify-center gap-3">
-              <Zap className="h-14 w-14 fill-pink-500 text-pink-500 drop-shadow-[0_0_20px_rgba(236,72,153,0.6)]" />
+              <Image
+                src="/favicon.ico"
+                alt="Solix Hub Logo"
+                width={56}
+                height={56}
+                className="drop-shadow-[0_0_20px_rgba(236,72,153,0.6)]"
+              />
               <h1 className="text-6xl font-bold tracking-tight md:text-7xl">
                 <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">Solix </span>
                 <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">Hub</span>
@@ -37,13 +63,28 @@ export default function Home() {
               Now offering long-term access keys, no interruptions, no constant renewals!
             </p>
 
-            <div className="flex justify-center">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <Button
+                size="lg"
+                className="min-w-[200px] bg-pink-500/20 text-pink-400 border border-pink-500/30 hover:bg-pink-500/30 hover:border-pink-500/50 transition-all"
+                onClick={handleCopyScript}
+              >
+                Get Script
+              </Button>
               <Button
                 size="lg"
                 className="min-w-[200px] bg-pink-500 text-white shadow-lg shadow-pink-500/30 hover:bg-pink-600 hover:shadow-xl hover:shadow-pink-500/40 transition-all"
                 asChild
               >
                 <a href="#pricing">Purchase Solix Hub</a>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="min-w-[120px] border-pink-500/30 text-pink-400 hover:bg-pink-500/10 hover:border-pink-500/50 transition-all"
+                asChild
+              >
+                <a href="https://solixhub.com/getkey">Get Key</a>
               </Button>
             </div>
           </div>
@@ -69,9 +110,9 @@ export default function Home() {
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/10 text-pink-400">
                   <Code className="h-6 w-6" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-white">100% UNC & sUNC</h3>
+                <h3 className="mb-2 text-xl font-semibold text-white">Freemium</h3>
                 <p className="leading-relaxed text-white/60">
-                  Solix Hub fully supports sUNC and UNC, enabling all functions seamlessly.
+                  Use the core features for free, with the paid plan removing access barriers for a faster, smoother experience.
                 </p>
               </CardContent>
             </Card>
@@ -81,10 +122,9 @@ export default function Home() {
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/10 text-pink-400">
                   <Shield className="h-6 w-6" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-white">Built-in HWID Spoofer</h3>
+                <h3 className="mb-2 text-xl font-semibold text-white">Support for 20+ Games</h3>
                 <p className="leading-relaxed text-white/60">
-                  Solix Hub includes a Roblox-specific HWID spoofer, so you can switch to other games without restarting
-                  your PC.
+                  Enjoy wide compatibility across more than twenty popular games, all optimized for smooth performance and seamless integration.
                 </p>
               </CardContent>
             </Card>
@@ -94,10 +134,9 @@ export default function Home() {
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/10 text-pink-400">
                   <Gauge className="h-6 w-6" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-white">FPS Boost</h3>
+                <h3 className="mb-2 text-xl font-semibold text-white">Compatible With Free Utilities</h3>
                 <p className="leading-relaxed text-white/60">
-                  Solix Hub greatly enhances your FPS by accurately imitating Hyperion, guaranteeing fluid gameplay and
-                  improved efficiency.
+                  Works smoothly with a variety of widely-used free utilities, ensuring easy setup and broad accessibility.
                 </p>
               </CardContent>
             </Card>
@@ -139,24 +178,21 @@ export default function Home() {
                   <p className="text-sm font-semibold text-white">Weekly Plan includes</p>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Free HWID Resets</span>
+                    <span className="text-sm text-white/70">7-Day Access</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Bot Access</span>
+                    <span className="text-sm text-white/70">Instant Key Delivery</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">3 HWID Seed Rotations</span>
+                    <span className="text-sm text-white/70">No Checkpoints or Ads</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Maximum instance count of 10</span>
+                    <span className="text-sm text-white/70">No More Frequent Reactivations</span>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">LIVE Channel Forcing</span>
-                  </div>
+
                 </div>
               </CardContent>
             </Card>
@@ -184,24 +220,21 @@ export default function Home() {
                   <p className="text-sm font-semibold text-white">2-Month Plan includes</p>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">All Weekly Features</span>
+                    <span className="text-sm text-white/70">60-Day Access</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Priority Bot Access - No throttle</span>
+                    <span className="text-sm text-white/70">Instant Key Delivery</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">15 HWID Seed Rotations</span>
+                    <span className="text-sm text-white/70">No Checkpoints or Ads</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Maximum instance count of 30</span>
+                    <span className="text-sm text-white/70">No More Frequent Reactivations</span>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-pink-400" />
-                    <span className="text-sm text-white/70">Priority Support</span>
-                  </div>
+
                 </div>
               </CardContent>
             </Card>
@@ -235,35 +268,12 @@ export default function Home() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-2" className="border border-white/10 rounded-lg bg-white/[0.02] px-6">
-                <AccordionTrigger className="text-left text-white hover:text-pink-400 hover:no-underline">
-                  Where do I download Solix Hub?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/60">
-                  You can download Solix Hub directly from our official download link at the top of this page, or visit
-                  api.volt.bz/version/download/ui. Make sure to only download from official sources to ensure security.
-                </AccordionContent>
-              </AccordionItem>
-
               <AccordionItem value="item-3" className="border border-white/10 rounded-lg bg-white/[0.02] px-6">
                 <AccordionTrigger className="text-left text-white hover:text-pink-400 hover:no-underline">
                   How do I activate my Solix Hub License?
                 </AccordionTrigger>
                 <AccordionContent className="text-white/60">
-                  After purchasing a Solix Hub license, you'll receive your license key via email. Simply open Solix
-                  Hub, enter your license key in the activation window, and you'll be ready to start using all premium
-                  features.
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="item-4" className="border border-white/10 rounded-lg bg-white/[0.02] px-6">
-                <AccordionTrigger className="text-left text-white hover:text-pink-400 hover:no-underline">
-                  How secure is Solix Hub?
-                </AccordionTrigger>
-                <AccordionContent className="text-white/60">
-                  Solix Hub is designed with security as a top priority. It includes built-in HWID spoofing, effectively
-                  emulates Hyperion to avoid detection, and is regularly updated to maintain security. Our team works
-                  24/7 to ensure Solix Hub remains undetected and secure.
+                  Join the official Solix Hub discord server https://discord.gg/solixhub. Redeem your purchased key in the #get-script channel. Launch Roblox, execute your script, and enjoy!
                 </AccordionContent>
               </AccordionItem>
 
@@ -300,7 +310,7 @@ export default function Home() {
                 className="bg-pink-500 text-white shadow-lg shadow-pink-500/30 hover:bg-pink-600 hover:shadow-xl hover:shadow-pink-500/40 transition-all"
                 asChild
               >
-                <a href="https://discord.gg/ggawp">Join Solix Hub Community</a>
+                <a href="https://discord.gg/solixhub" target="_blank" rel="noopener noreferrer">Join Solix Hub Community</a>
               </Button>
             </div>
           </div>
@@ -330,6 +340,7 @@ export default function Home() {
           <p className="text-sm text-white/40">© 2025 Solix Hub. All rights reserved.</p>
         </div>
       </footer>
+
     </div>
   )
 }

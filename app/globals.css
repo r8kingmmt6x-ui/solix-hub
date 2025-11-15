@@ -22,3 +22,44 @@ body {
 .dark {
   --border: 0 0% 14.9%;
 }
+
+/* Fantastic toast animations */
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(-100%) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes toast-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+  }
+}
+
+/* Only apply animations to toast elements */
+[data-radix-toast][data-state="open"] {
+  animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1), toast-glow 2s ease-in-out infinite;
+}
+
+[data-radix-toast][data-state="closed"] {
+  animation: toast-slide-out 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
